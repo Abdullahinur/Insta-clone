@@ -13,16 +13,15 @@
 #         ...
 from django.db import models
 from django.contrib.auth.models import User
-# For Signals
-# from django.db.models.signals import post_save
-# from django.dispatch import receiver
 
 
 # Create your models here.
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_photo = models.ImageField(upload_to='profile_photos/')
-    bio = models.TextField(max_length=500, blank=True)
+    # user profiles properties
+    user = models.CharField(max_length=30, default='User')
+    profile_photo = models.ImageField(upload_to="profile_photos/", null=True)
+    bio = models.TextField(default="Awww, Shucks..it's a secret", blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 
 
@@ -36,6 +35,9 @@ class Profile(models.Model):
 
 
 
+    # For Signals
+    # from django.db.models.signals import post_save
+    # from django.dispatch import receiver
 
 # # Define signals so Profile model will be automatically created and updated when user instances are created/updated
 # # Hook methods to User Model whenever save event occurs
