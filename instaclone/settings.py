@@ -75,10 +75,13 @@ WSGI_APPLICATION = 'instaclone.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-      'default': dj_database_url.config(
-          default='sqlite:////{0}'.format(os.path.join(BASE_DIR, 'db.sqlite3'))
-      )
-  }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'instaclone',
+        'USER': 'abdullahinur',
+        'PASSWORD': 'totpot90210',
+    }
+}
 
 
 # Password validation
@@ -105,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
