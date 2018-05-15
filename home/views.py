@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 # View function to display the homepage
 def home(request):
-    home = "This is My Insta-Clone"
+    home = "This is My Instagram clone"
     return render(request, 'home/home.html', {"home": home})
 
 

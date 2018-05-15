@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  {% if home %}
+  <title>My InstaClone - {{home}}</title>
+  {% else %}
+    <title> My Insta-clone </title>
+  {% endif %}
+
+</head>
+<body>
+    {% block content %}
+    {%endblock%}
+</body>
+</html>
