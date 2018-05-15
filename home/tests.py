@@ -1,11 +1,11 @@
 from django.test import TestCase
-from .models import Profile
+from .models import Profile, Image
 
 
 # Create your tests here.
 class ProfileTestClass(TestCase):
     '''
-    class that test the characteristics of the Profile model
+    tests for the Profile model
     '''
 
     def setUp(self):
@@ -26,3 +26,28 @@ class ProfileTestClass(TestCase):
         self.profile.delete_profile()
         all_profiles = Profile.objects.all()
         self.assertTrue(len(all_profiles) == 1)
+
+
+class ImageTestClass(TestCase):
+    '''
+    tests for the Image model
+    '''
+
+    def setUp(self):
+        self.image = Image(image='NicholasCageWasHere', image_name='ThisAintAGame', image_caption='Cheezy, McAbdul',)
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.image, Image))
+
+    def test_save_image(self):
+        self.image.save_image()
+        all_images = Image.objects.all()
+        self.assertTrue(len(all_images) > 0)
+
+    def test_delete_image(self):
+        self.image.save_image()
+        my_image = Image.objects.get(image='NicholasCageWasHere', image_name='ThisAintAGame', image_caption='Cheezy, McAbdul')
+        my_image.save_image()
+        self.image.delete_image()
+        all_images = Image.objects.all()
+        self.assertTrue(len(all_images) == 0)

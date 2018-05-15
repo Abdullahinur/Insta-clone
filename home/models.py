@@ -11,11 +11,14 @@
 #
 #     def do_something(self):
 #         ...
+
+
 from django.db import models
 from django.contrib.auth.models import User
 
 
 # Create your models here.
+# This is the Profile class where the Properties are defined
 class Profile(models.Model):
     # user profiles properties
     username = models.CharField(max_length=30, default='User')
@@ -33,28 +36,16 @@ class Profile(models.Model):
         self.delete()
 
 
+class Image(models.Model):
+    image = models.ImageField(upload_to="images/", null=True)
+    image_name = models.CharField(max_length=30, null=True)
+    image_caption = models.TextField(null=True)
 
+    def __str__(self):
+        return self.image_name
 
+    def save_image(self):
+        self.save()
 
-
-
-
-
-
-
-
-    # For Signals
-    # from django.db.models.signals import post_save
-    # from django.dispatch import receiver
-
-# # Define signals so Profile model will be automatically created and updated when user instances are created/updated
-# # Hook methods to User Model whenever save event occurs
-# @receiver(post_save, send=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
-#
-#
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
+    def delete_image(self):
+        self.delete()
