@@ -1,4 +1,5 @@
 {% load bootstrap3 %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
   <body>
 
       {% block content %}
-    
+    <img src="{% static '/assets/images/index.png' %}" alt="under-construction">
       {% endblock %}
 
     {% block scripts %}
