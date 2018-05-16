@@ -103,6 +103,26 @@ class Comment(models.Model):
         # A method to delete comments
         self.delete()
 
-        
+
 class Like(models.Model):
-    pass
+    # properties for likes
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, null=True)
+
+    def __init__(self):
+        return self.user.username
+
+    def save_like(self):
+        self.save()
+
+    def remove_like(self):
+        self.delete()
+
+    def like(self):
+        self.likes_number = 2
+        self.save()
+
+    @classmethod
+    def get_likes(cls, image_id):
+        likes = cls.objects.filter(image=image_id)
+        return likes
