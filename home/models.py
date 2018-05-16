@@ -35,6 +35,11 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
+    @classmethod
+    def find_profile(cls, name):
+        found_profiles = cls.objects.filter(username__icontains = name).all()
+        return found_profiles
+
 
 class Image(models.Model):
     # Image class properties
