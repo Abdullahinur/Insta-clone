@@ -37,6 +37,7 @@ class Profile(models.Model):
 
 
 class Image(models.Model):
+    # Image class properties
     image = models.ImageField(upload_to="images/", null=True)
     image_name = models.CharField(max_length=30, null=True)
     image_caption = models.TextField(null=True)
@@ -45,6 +46,10 @@ class Image(models.Model):
     likes = models.PositiveIntegerField(default=0)
     comments_number = models.PositiveIntegerField(default=0)
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        # Function to order most recent using pub date
+        ordering = ['-pub_date']
 
     def __str__(self):
         return self.image_name
@@ -64,10 +69,40 @@ class Image(models.Model):
         retrived_image = Image.objects.get(id=id)
         return retrived_image
 
+    @classmethod
+    def get_images_by_user(cls,id):
+        posted_images = Image.objects.filter(user_id=id)
+        return posted_images
+
+    @classmethod
+    def get_all_images(cls):
+        all_posted_images = cls.objects.all()
+        return all_posted_images
+
+
+    @classmethod
+    def get_timeline_posts(cls):
+        # Function to retrieve posts that the current user has
+        timeline_posts = Image.objects.filter()
+
 
 class Comment(models.Model):
-    pass
+    # properties for comments
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    image_id = models.ForeignKey(Image, on_delete=models.CASCADE, null=True)
+    comment = models.TextField(blank=True)
 
+    def __str__(self):
+        return self.comment
 
+    def save_comment(self):
+        # A method that saves the comment to the images
+        self.save()
+
+    def delete_comment(self):
+        # A method to delete comments
+        self.delete()
+
+        
 class Like(models.Model):
     pass
