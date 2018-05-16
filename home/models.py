@@ -40,6 +40,11 @@ class Image(models.Model):
     image = models.ImageField(upload_to="images/", null=True)
     image_name = models.CharField(max_length=30, null=True)
     image_caption = models.TextField(null=True)
+    profile_key = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    user_key = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    likes = models.PositiveIntegerField(default=0)
+    comments_number = models.PositiveIntegerField(default=0)
+    pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.image_name
@@ -49,3 +54,20 @@ class Image(models.Model):
 
     def delete_image(self):
         self.delete()
+
+    def update_caption(self, new_caption):
+        self.image_caption = new_caption
+        self.save()
+
+    @classmethod
+    def get_image_by_id(cls, id):
+        retrived_image = Image.objects.get(id=id)
+        return retrived_image
+
+
+class Comment(models.Model):
+    pass
+
+
+class Like(models.Model):
+    pass
