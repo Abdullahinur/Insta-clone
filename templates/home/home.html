@@ -3,6 +3,12 @@
 
 
 {% block content %}
+{% load static %}
 <p>Hello world</p>
-
+<img src="{% static "/assets/images/index.png" %}" alt="">
+{% for images in image %}
+  <h1>{{images.image_name}}</h1>
+  <h2>"{{images.image_caption}}"</h2>
+  <img src="{{images.image.url}}" alt="">
+{% endfor %}
 {% endblock %}
