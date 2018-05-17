@@ -26,7 +26,7 @@ class Profile(models.Model):
     bio = models.TextField(default="Awww, Shucks..it's a secret", blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
-    def __str__():
+    def __str__(self):
         return self.username
 
     def save_profile(self):

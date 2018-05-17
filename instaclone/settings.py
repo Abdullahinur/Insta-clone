@@ -57,7 +57,7 @@ ROOT_URLCONF = 'instaclone.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['registration'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

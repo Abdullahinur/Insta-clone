@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Image
 
 
 # Create your views here.
@@ -6,7 +7,8 @@ from django.shortcuts import render
 # View function to display the homepage
 def home(request):
     home = "This is My Instagram clone"
-    return render(request, 'home/home.html', {"home": home})
+    image = Image.get_all_images()
+    return render(request, 'home/home.html', {"home": home, "image": image})
 
 
 # View function to display the user login page
