@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 project_folder = os.path.expanduser('instaclone')
 load_dotenv(os.path.join(project_folder, '.env'))
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instaclone.settings.local")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "instaclone.settings")
 
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
