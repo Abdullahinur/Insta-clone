@@ -3,12 +3,11 @@
 
 
 {% block content %}
-{% load static %}
-<a class="btn btn-default" href="{% url 'signup' %}">SignUp</a>
-<br>
-{% for images in image %}
-  <h1>{{images.image_name}}</h1>
-  <h2>"{{images.image_caption}}"</h2>
-  <img src="{{images.image.url}}" alt="">
-{% endfor %}
+<div id="center">
+  <h1><a href="{% url 'signup' %}">Click Here to sign up</a></h1>
+  {% for images in image %}
+    <img src="{{images.image.url}}" alt="">
+  {% endfor %}
+</div>
+
 {% endblock %}

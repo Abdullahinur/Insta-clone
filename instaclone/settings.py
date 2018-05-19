@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'home.apps.HomeConfig',
+    'accounts.apps.AccountsConfig',
     'bootstrap3',
     'django.contrib.admin',
     'django.contrib.auth',

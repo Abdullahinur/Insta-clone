@@ -7,7 +7,7 @@ from . import views as core_views
 urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^Signup/$', core_views.signup, name='signup'),
-    url(r'^UserLogin/$', views.user_login, name='userLogin'),
+    url(r'^accounts/login$', views.user_login, name='accounts'),
     url(r'^dashboard/$', views.dashboard, name='dashboard')
 ]
 if settings.DEBUG:
