@@ -26,7 +26,7 @@ class Profile(models.Model):
     username = models.CharField(max_length=30, default='User')
     profile_photo = models.ImageField(upload_to="profile_photos/", null=True)
     bio = models.TextField(default="Awww, Shucks..it's a secret", blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='profile')
 
     def __str__(self):
         return self.username
@@ -46,7 +46,7 @@ class Profile(models.Model):
     def update_user_profile(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user=instance)
-        instance.profile.save()
+        instance.profile.get()
 
 
 class Image(models.Model):
@@ -139,3 +139,23 @@ class Like(models.Model):
     def get_likes(cls, image_id):
         likes = cls.objects.filter(image=image_id)
         return likes
+
+
+class Follow(models.Model):
+    '''
+    Class that defines followers of each user
+    '''
+    follower = models.ForeignKey(User,on_delete=models.CASCADE, null= True)
+    user = models.ForeignKey(Profile,on_delete=models.CASCADE, null= True)
+
+    def __int__(self):
+        return self.follower.username
+
+    def save_follower(self):
+        self.save()
+
+    @classmethod
+    def get_followers(cls,profile_id):
+        profile = Profile.objects.filter(id = profile_id)
+        followers = cls.objects.filter(user= profile.user.id)
+        return len(followers)

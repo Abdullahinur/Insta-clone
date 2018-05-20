@@ -1,13 +1,34 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from . models import Image, Comment, Profile
+from django.contrib.auth.forms import AuthenticationForm
 
 
-class SignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-
+class ImageForm(forms.ModelForm):
+    '''
+    class that creates and image upload form
+    '''
     class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+        model = Image
+        fields = ['image','image_name','image_caption']
+
+class CommentForm(forms.ModelForm):
+    '''
+    class that creates the comment form
+    '''
+    class Meta:
+        model = Comment
+        fields = ['comment']
+
+class ProfileUpdateForm(forms.Form):
+    '''
+    classs that creates profile update form
+    '''
+    username = forms.CharField(label='Username',max_length = 30)
+    profile_photo = forms.ImageField(label = 'Image Field')
+    bio = forms.CharField(label='Image Caption',max_length=500)
+
+class UpdateImageCaption(forms.Form):
+    '''
+    class that creates the caption update form
+    '''
+image_caption = forms.CharField(label='Image Caption',max_length=300)
